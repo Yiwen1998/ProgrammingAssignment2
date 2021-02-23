@@ -103,3 +103,28 @@ In order to complete this assignment, you must do the following:
 ### Grading
 
 This assignment will be graded via peer assessment.
+
+
+makeVector <- function(x = numeric()) {
+            m <- NULL
+            set <- function(y) {
+                    x <<- y
+                    m <<- NULL
+            }
+            get <- function() x
+            setinverse <- function(inverse) m <<- inverse
+            getinverse <- function() m
+            list(set = set, get = get,
+                 setinverse = setinverse,
+                 getinverse = getinverse)
+    }
+ cachemean <- function(x, ...) {
+            m <- x$getinverse()
+            if(!is.null(m)) {
+                    message("getting cached data")
+                    return(m)
+            }
+            data <- x$get()
+            m <- inverse(data, ...)
+            x$setinverse(m)
+            m
